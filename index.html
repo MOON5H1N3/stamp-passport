@@ -26,6 +26,7 @@
   --cover: #262b5e;
   --cover-ink: #f3f1ea;
   --signal: #e4a72a;
+  --focus: #1c2140;
   --i-house: #c03d2a;
   --i-garden: #3d7438;
   --i-castle: #2c4c9c;
@@ -41,14 +42,14 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --paper: #10132a; --paper-2: #181c38; --ink: #e7e9f3; --muted: #9ba1ba; --line: #2c3256;
-    --cover: #0a0c1f; --cover-ink: #f3f1ea; --signal: #f2b941;
+    --cover: #0a0c1f; --cover-ink: #f3f1ea; --signal: #f2b941; --focus: #f2b941;
     --i-house: #f08a74; --i-garden: #82c47a; --i-castle: #8faaf0; --i-coast: #5cc6d3; --i-countryside: #d9b65a; --i-ruin: #cc96dc; --i-summit: #a5b6cf; --i-trail: #f09a5e;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --paper: #10132a; --paper-2: #181c38; --ink: #e7e9f3; --muted: #9ba1ba; --line: #2c3256;
-  --cover: #0a0c1f; --cover-ink: #f3f1ea; --signal: #f2b941;
+  --cover: #0a0c1f; --cover-ink: #f3f1ea; --signal: #f2b941; --focus: #f2b941;
   --i-house: #f08a74; --i-garden: #82c47a; --i-castle: #8faaf0; --i-coast: #5cc6d3; --i-countryside: #d9b65a; --i-ruin: #cc96dc; --i-summit: #a5b6cf; --i-trail: #f09a5e;
   color-scheme: dark;
 }
@@ -101,7 +102,7 @@ h1 span { color: var(--signal); }
 .tab small { font: 400 12px var(--f-stamp); color: var(--muted); letter-spacing: .04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .tab[aria-selected="true"] { background: var(--cover); border-color: var(--cover); color: var(--cover-ink); box-shadow: inset 0 -3px 0 var(--signal); }
 .tab[aria-selected="true"] small { color: var(--cover-ink); opacity: .8; }
-.tab:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+.tab:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .summary { display: flex; flex-wrap: wrap; gap: 10px 28px; align-items: center; padding-top: 22px; }
 .stat { display: grid; }
 .stat b { font: 800 34px/1 var(--f-display); font-variant-numeric: tabular-nums; }
@@ -125,7 +126,7 @@ h1 span { color: var(--signal); }
 .btn { font: 600 14px var(--f-body); padding: 9px 14px; border-radius: 6px; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); cursor: pointer; }
 .btn.ghost { background: transparent; color: var(--ink); }
 .btn.danger { background: transparent; color: var(--i-house); border-color: var(--i-house); }
-button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, .slot:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, .slot:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 
 /* Pages */
 .page { padding-block: 28px 8px; }
