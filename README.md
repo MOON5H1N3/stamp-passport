@@ -6,7 +6,11 @@ Collect an illustrated stamp for every heritage place, summit and trail you visi
 - **35 summits**, each stamp showing its height, plus the National Three Peaks and Yorkshire Three Peaks sets
 - **21 long-distance trails** (National Trails and Scotland's Great Trails), each stamp showing its length
 - **Every stamp is a different original drawing**, with its own frame, ink and angle
-- **Add your own** places, summits or trails
+- **Add your own** places, summits or trails, and pick a drawing for each so it gets a proper stamp
+- **Sets:** ten built-in sets (Three Peaks, Castles of Edward I, Great abbeys and more) plus sets you make yourself
+- **Milestone badges** for stamp counts, metres climbed, miles walked, variety and completed sets
+- **Your year:** a year in review with totals, a month-by-month chart and highlights, which you can save as an image to share
+- **Cover colours:** six colours for your book's cover
 - **Works offline** once opened, so it is fine on a hill with no signal
 - **Installs like an app** from the browser, with its own home-screen icon
 - **Private:** stamps stay on your device. No accounts, no server, no tracking
