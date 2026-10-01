@@ -3,51 +3,53 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Stamp Passport</title>
-<meta name="description" content="Collect a stamp for every heritage place you visit.">
-<meta name="theme-color" content="#1f3b2d">
+<title>Waystamp</title>
+<meta name="description" content="Collect an illustrated stamp for every heritage place, summit and trail you visit.">
+<meta name="theme-color" content="#262b5e">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Passport">
+<meta name="apple-mobile-web-app-title" content="Waystamp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,700;1,6..96,500&family=Figtree:wght@400;500;600&family=Courier+Prime:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=Courier+Prime:wght@400;700&display=swap">
 <style>
-/* Layout: a passport booklet. Slim cover band, then one "page" per region with a grid of stamp slots. */
+/* Layout: a stamp book. Indigo cover band, sticky tabs (Places / Summits / Trails), then one "page" per region with a grid of stamp slots on contour-line paper. */
 :root {
-  --paper: #eef0e6;
-  --paper-2: #e3e7d8;
-  --ink: #23332a;
-  --muted: #5d6b60;
-  --line: #c4cbb8;
-  --cover: #1f3b2d;
-  --cover-ink: #e9e3c9;
-  --gilt: #b8975a;
-  --i-house: #8a2f24;
-  --i-garden: #2f6b3c;
-  --i-castle: #27406b;
-  --i-coast: #1e6a78;
-  --i-countryside: #6b5a1e;
-  --i-ruin: #5f3a6b;
-  --f-display: "Bodoni Moda", "Didot", "Georgia", serif;
+  --paper: #eef1f4;
+  --paper-2: #e1e6ec;
+  --ink: #1c2140;
+  --muted: #5a6079;
+  --line: #c2c9d4;
+  --cover: #262b5e;
+  --cover-ink: #f3f1ea;
+  --signal: #e4a72a;
+  --i-house: #c03d2a;
+  --i-garden: #3d7438;
+  --i-castle: #2c4c9c;
+  --i-coast: #0f7480;
+  --i-countryside: #87660f;
+  --i-ruin: #7a3a8a;
+  --i-summit: #3a4d68;
+  --i-trail: #b0501a;
+  --f-display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
   --f-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-stamp: "Courier Prime", "Courier New", monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #151b17; --paper-2: #1c241f; --ink: #e4e6dc; --muted: #9aa69c; --line: #34413a;
-    --cover: #0e1a13; --cover-ink: #e9e3c9; --gilt: #c9a96b;
-    --i-house: #e07a68; --i-garden: #74c487; --i-castle: #86a6e0; --i-coast: #6cc4d2; --i-countryside: #d4bd6a; --i-ruin: #c792d6;
+    --paper: #10132a; --paper-2: #181c38; --ink: #e7e9f3; --muted: #9ba1ba; --line: #2c3256;
+    --cover: #0a0c1f; --cover-ink: #f3f1ea; --signal: #f2b941;
+    --i-house: #f08a74; --i-garden: #82c47a; --i-castle: #8faaf0; --i-coast: #5cc6d3; --i-countryside: #d9b65a; --i-ruin: #cc96dc; --i-summit: #a5b6cf; --i-trail: #f09a5e;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --paper: #151b17; --paper-2: #1c241f; --ink: #e4e6dc; --muted: #9aa69c; --line: #34413a;
-  --cover: #0e1a13; --cover-ink: #e9e3c9; --gilt: #c9a96b;
-  --i-house: #e07a68; --i-garden: #74c487; --i-castle: #86a6e0; --i-coast: #6cc4d2; --i-countryside: #d4bd6a; --i-ruin: #c792d6;
+  --paper: #10132a; --paper-2: #181c38; --ink: #e7e9f3; --muted: #9ba1ba; --line: #2c3256;
+  --cover: #0a0c1f; --cover-ink: #f3f1ea; --signal: #f2b941;
+  --i-house: #f08a74; --i-garden: #82c47a; --i-castle: #8faaf0; --i-coast: #5cc6d3; --i-countryside: #d9b65a; --i-ruin: #cc96dc; --i-summit: #a5b6cf; --i-trail: #f09a5e;
   color-scheme: dark;
 }
 html { -webkit-text-size-adjust: 100%; }
@@ -77,20 +79,41 @@ body {
   color: var(--cover-ink);
   margin-inline: -16px;
   padding: calc(28px + env(safe-area-inset-top, 0px)) 16px 24px;
-  border-bottom: 3px double var(--gilt);
+  border-bottom: 4px solid var(--signal);
 }
 .cover-in { max-width: 1040px; margin-inline: auto; display: flex; flex-wrap: wrap; gap: 20px 32px; align-items: end; justify-content: space-between; }
-.eyebrow { font-family: var(--f-stamp); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--gilt); margin: 0 0 6px; }
-h1 { font-family: var(--f-display); font-weight: 500; font-size: clamp(32px, 6vw, 52px); line-height: 1; margin: 0; text-wrap: balance; }
-h1 em { font-style: italic; color: var(--gilt); }
+.eyebrow { font-family: var(--f-stamp); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--signal); margin: 0 0 6px; }
+.brand { display: flex; align-items: center; gap: 14px; }
+.mark { width: 60px; height: 60px; flex: none; color: var(--cover-ink); transform: rotate(-8deg); }
+h1 { font-family: var(--f-display); font-weight: 800; font-size: clamp(36px, 7vw, 56px); line-height: .95; letter-spacing: -.02em; margin: 0; }
+h1 span { color: var(--signal); }
 .tally { display: flex; gap: 28px; flex-wrap: wrap; }
 .tally div { display: grid; }
-.tally b { font-family: var(--f-display); font-size: 34px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums lining-nums; }
+.tally b { font-family: var(--f-display); font-size: 38px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums lining-nums; }
 .tally span { font-family: var(--f-stamp); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: .8; }
 
 /* Controls */
 .controls { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper); margin-inline: -16px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
 .controls-in { max-width: 1040px; margin-inline: auto; display: grid; gap: 10px; }
+.tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.tab { all: unset; box-sizing: border-box; cursor: pointer; display: grid; gap: 1px; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line); min-width: 0; }
+.tab b { font: 700 17px/1.1 var(--f-display); }
+.tab small { font: 400 12px var(--f-stamp); color: var(--muted); letter-spacing: .04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tab[aria-selected="true"] { background: var(--cover); border-color: var(--cover); color: var(--cover-ink); box-shadow: inset 0 -3px 0 var(--signal); }
+.tab[aria-selected="true"] small { color: var(--cover-ink); opacity: .8; }
+.tab:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+.summary { display: flex; flex-wrap: wrap; gap: 10px 28px; align-items: center; padding-top: 22px; }
+.stat { display: grid; }
+.stat b { font: 800 34px/1 var(--f-display); font-variant-numeric: tabular-nums; }
+.stat span { font: 400 12px var(--f-stamp); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.set { display: grid; grid-template-columns: auto auto; gap: 4px 12px; align-items: center; padding: 10px 14px; border: 1px dashed var(--line); border-radius: 8px; }
+.set-name { grid-column: 1 / -1; font-weight: 600; font-size: 14px; }
+.dots { display: inline-flex; gap: 5px; }
+.dots i { width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--i-summit); }
+.dots i.on { background: var(--i-summit); }
+.set-state { font: 400 12px var(--f-stamp); color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+.set.full { border-style: solid; border-color: var(--signal); }
+.set.full .set-state { color: var(--ink); font-weight: 700; }
 .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .search { flex: 1 1 220px; min-width: 0; font: inherit; padding: 9px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper-2); color: var(--ink); }
 .chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: thin; }
@@ -102,12 +125,12 @@ h1 em { font-style: italic; color: var(--gilt); }
 .btn { font: 600 14px var(--f-body); padding: 9px 14px; border-radius: 6px; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); cursor: pointer; }
 .btn.ghost { background: transparent; color: var(--ink); }
 .btn.danger { background: transparent; color: var(--i-house); border-color: var(--i-house); }
-button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, .slot:focus-visible { outline: 2px solid var(--gilt); outline-offset: 2px; }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, .slot:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
 
 /* Pages */
 .page { padding-block: 28px 8px; }
 .page-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 18px; }
-.page-head h2 { font-family: var(--f-display); font-weight: 500; font-size: 26px; margin: 0; text-wrap: balance; }
+.page-head h2 { font-family: var(--f-display); font-weight: 700; font-size: 26px; letter-spacing: -.01em; margin: 0; text-wrap: balance; }
 .page-meta { font-family: var(--f-stamp); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: flex; gap: 14px; align-items: center; }
 .bar { width: 90px; height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
 .bar i { display: block; height: 100%; background: var(--ink); }
@@ -137,9 +160,9 @@ label.btn { cursor: pointer; }
 
 /* Dialogs */
 dialog { border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink); padding: 0; width: min(420px, calc(100vw - 32px)); }
-dialog::backdrop { background: rgba(10, 18, 13, .55); }
+dialog::backdrop { background: rgba(14, 16, 40, .55); }
 .dlg { padding: 22px; display: grid; gap: 14px; }
-.dlg h3 { font-family: var(--f-display); font-weight: 500; font-size: 24px; margin: 0; line-height: 1.15; text-wrap: balance; }
+.dlg h3 { font-family: var(--f-display); font-weight: 700; font-size: 24px; margin: 0; line-height: 1.15; text-wrap: balance; }
 .dlg .kicker { font-family: var(--f-stamp); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0; }
 .dlg label { display: grid; gap: 4px; font-size: 13px; font-weight: 600; }
 .dlg input, .dlg textarea, .dlg select { font: 400 15px var(--f-body); padding: 9px 11px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper-2); color: var(--ink); width: 100%; }
@@ -168,28 +191,34 @@ dialog::backdrop { background: rgba(10, 18, 13, .55); }
 
 <header class="cover">
   <div class="cover-in">
-    <div>
-      <p class="eyebrow">Heritage places · Visitor's record</p>
-      <h1>Stamp <em>Passport</em></h1>
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="currentColor"><circle cx="60" cy="60" r="55" stroke-width="5"/><circle cx="60" cy="60" r="46" stroke-width="2"/></g><clipPath id="mk"><circle cx="60" cy="60" r="40"/></clipPath><g clip-path="url(#mk)"><path d="M14 92L46 52L58 64L74 42L108 92Z" fill="currentColor"/><path d="M34 100Q52 84 50 76Q48 70 62 64" fill="none" stroke="var(--cover)" stroke-width="5" stroke-linecap="round"/><circle cx="84" cy="36" r="7" fill="var(--signal)"/></g></svg>
+      <div>
+        <p class="eyebrow">Heritage · Summits · Trails</p>
+        <h1>Way<span>stamp</span></h1>
+      </div>
     </div>
     <div class="tally" aria-live="polite">
-      <div><b id="t-count">0</b><span>Stamps</span></div>
-      <div><b id="t-total">0</b><span>Places listed</span></div>
-      <div><b id="t-regions">0</b><span>Regions visited</span></div>
+      <div><b id="t-count">0</b><span>Stamps collected</span></div>
     </div>
   </div>
 </header>
 
 <div class="controls">
   <div class="controls-in">
+    <div class="tabs" role="tablist" aria-label="Collections">
+      <button type="button" class="tab" role="tab" data-kind="places" aria-selected="true"><b>Places</b><small><span id="t-places">0</span> <span id="t-places-of"></span></small></button>
+      <button type="button" class="tab" role="tab" data-kind="summits" aria-selected="false"><b>Summits</b><small><span id="t-summits">0</span> <span id="t-summits-of"></span></small></button>
+      <button type="button" class="tab" role="tab" data-kind="trails" aria-selected="false"><b>Trails</b><small><span id="t-trails">0</span> <span id="t-trails-of"></span></small></button>
+    </div>
     <div class="row">
-      <input id="q" class="search" type="search" placeholder="Search places, e.g. Tyntesfield" aria-label="Search places">
+      <input id="q" class="search" type="search" placeholder="Search places, e.g. Tyntesfield" aria-label="Search">
       <div class="seg" role="group" aria-label="Show">
         <button type="button" data-show="all" aria-pressed="true">All</button>
         <button type="button" data-show="done" aria-pressed="false">Stamped</button>
-        <button type="button" data-show="todo" aria-pressed="false">To visit</button>
+        <button type="button" data-show="todo" aria-pressed="false">Not yet</button>
       </div>
-      <button type="button" class="btn ghost" id="add-btn">+ Add a place</button>
+      <button type="button" class="btn ghost" id="add-btn">+ Add your own</button>
     </div>
     <div class="chips" id="chips" role="group" aria-label="Region"></div>
   </div>
@@ -208,7 +237,7 @@ dialog::backdrop { background: rgba(10, 18, 13, .55); }
     </div>
   </div>
   <p id="ios-hint" class="hint" hidden>To install on iPhone or iPad: open this page in Safari, tap the Share button, then <b>Add to Home Screen</b>.</p>
-  <p class="hint">Your stamps are kept on this device only. Save a backup now and then, and restore it if you change phone. An unofficial personal record, not affiliated with the National Trust.</p>
+  <p class="hint">Your stamps are kept on this device only. Save a backup now and then, and restore it if you change phone. Waystamp is an independent, open-source project. It is not affiliated with or endorsed by the National Trust, English Heritage, Cadw, Historic Environment Scotland or any other organisation whose places appear here. All stamp artwork is original.</p>
 </footer>
 <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
@@ -222,7 +251,7 @@ dialog::backdrop { background: rgba(10, 18, 13, .55); }
     </div>
     <div id="s-edit">
       <div style="display:grid;gap:12px">
-        <label for="s-date">Date of visit<input id="s-date" type="date" required></label>
+        <label for="s-date"><span id="s-date-label">Date of visit</span><input id="s-date" type="date" required></label>
         <label for="s-memo">Note <span style="font-weight:400;color:var(--muted)">(optional)</span><textarea id="s-memo" placeholder="Who you went with, the best bit, the café cake..."></textarea></label>
       </div>
     </div>
@@ -241,11 +270,11 @@ dialog::backdrop { background: rgba(10, 18, 13, .55); }
 
 <dialog id="dlg-add">
   <form class="dlg" id="f-add" method="dialog">
-    <p class="kicker">New page entry</p>
-    <h3>Add a place</h3>
-    <label for="a-name">Name<input id="a-name" required maxlength="60" placeholder="e.g. Brownsea Island"></label>
+    <p class="kicker">New entry</p>
+    <h3>Add your own</h3>
+    <label for="a-name">Name<input id="a-name" required maxlength="60" placeholder="e.g. Brownsea Island or Pen y Fan"></label>
+    <label for="a-type">Kind<select id="a-type"></select></label>
     <label for="a-region">Region<select id="a-region"></select></label>
-    <label for="a-type">Kind of place<select id="a-type"></select></label>
     <div class="actions">
       <button type="button" class="btn ghost" id="a-cancel">Cancel</button>
       <button type="submit" class="btn">Add to passport</button>
@@ -255,26 +284,58 @@ dialog::backdrop { background: rgba(10, 18, 13, .55); }
 
 <script>
 const TYPES = {
-  house: "Historic house", garden: "Garden", castle: "Castle", coast: "Coast", countryside: "Countryside", ruin: "Ruin & ancient site"
+  house: "Historic house", garden: "Garden", castle: "Castle", coast: "Coast", countryside: "Countryside", ruin: "Ruin & ancient site", summit: "Summit", trail: "Trail"
 };
-const REGIONS = ["South West", "South East & London", "East of England", "Midlands", "North", "Wales", "Northern Ireland"];
+const KINDS = {
+  places: { label: "Places", noun: "places", groups: ["South West", "South East & London", "East of England", "Midlands", "North", "Wales", "Scotland", "Northern Ireland"] },
+  summits: { label: "Summits", noun: "summits", groups: ["Scotland", "Lake District", "Wales", "Pennines & Peak", "Southern England", "Northern Ireland"] },
+  trails: { label: "Trails", noun: "trails", groups: ["England", "Wales", "Scotland"] }
+};
+const kindOf = p => p.type === "summit" ? "summits" : p.type === "trail" ? "trails" : "places";
+const REGIONS = KINDS.places.groups;
 const RAW = {
-  "South West": `Tyntesfield|house|house W=36 f=3 r=gable tw=spire c=3 tr=1;Dyrham Park|house|park house=1;Clevedon Court|house|house W=40 f=2 r=gable g=3 c=2;Leigh Woods|countryside|hills woods=1;Prior Park Landscape Garden~Prior Park|garden|temple v=bridge;Lacock Abbey|house|house W=38 f=2 r=flat tw=oct wp=1 tr=1;Stourhead|garden|temple v=lake;Avebury|ruin|stones;Newark Park|house|house W=28 f=3 r=flat c=2 tr=2;Chedworth Roman Villa~Chedworth|ruin|roman v=mosaic;Snowshill Manor|house|house W=34 f=2 r=gable g=2 c=2 tr=1;Hidcote|garden|garden hedges=1;Brean Down|coast|hills v=ridge sea=1;Cheddar Gorge|countryside|hills v=gorge;Montacute House|house|house W=44 f=3 r=flat tw=pinn;Barrington Court|house|house W=40 f=2 r=gable g=3 tw=pinn;Lytes Cary Manor|house|house W=34 f=2 r=gable g=2 tr=1;Dunster Castle|castle|castle hill=1 trees=1 keep=1;Holnicote Estate|countryside|hills woods=1 wall=1;Corfe Castle|castle|castle hill=1 ruin=1 keep=1;Kingston Lacy|house|house W=40 f=3 r=hip c=4 tr=1;Studland Bay|coast|lighthouse stacks=1 nolight=1;Golden Cap|coast|cliffs v=cap;Killerton|house|house W=40 f=2 r=hip tr=2;Knightshayes|house|house W=40 f=2 r=gable g=2 c=3 wp=1;Castle Drogo|castle|castle hill=1 keep=1;Arlington Court|house|house W=36 f=2 r=flat p=1 tr=1;Lanhydrock|house|house W=40 f=2 r=gable g=3 c=4 tr=2;Cotehele|house|house W=30 f=2 r=gable tw=batt tr=1;St Michael's Mount|castle|island;Trelissick|garden|garden;Glendurgan Garden~Glendurgan|garden|garden maze=1;Kynance Cove|coast|cliffs v=cove`,
-  "South East & London": `Sissinghurst Castle Garden~Sissinghurst|garden|garden tower=1;Knole|house|park;Chartwell|house|house W=36 f=2 r=gable g=3 c=4 tr=1;Scotney Castle|castle|castle moat=1 ruin=1 round=1;Bodiam Castle|castle|castle moat=1 round=1;Petworth|house|house W=56 f=3 r=flat tr=0;Nymans|garden|abbey t=low;Sheffield Park|garden|lakepark;Wakehurst|garden|garden house=1;Polesden Lacey|house|house W=40 f=2 r=hip p=1 tr=1;Hinton Ampner|house|house W=36 f=2 r=hip c=2 tr=1;Mottisfont|garden|garden v=roses;The Vyne|house|house W=40 f=2 r=gable p=1 c=4;Basildon Park|house|house w=2 f=2 r=flat p=1;Cliveden|house|house W=44 f=3 r=flat tr=1;Waddesdon Manor|house|house W=44 f=3 r=mansard tw=round;Stowe|garden|temple v=lake t=portico;Birling Gap & Seven Sisters~Seven Sisters|coast|cliffs v=sisters;White Cliffs of Dover|coast|cliffs v=dover;The Needles Old Battery~The Needles|coast|lighthouse stacks=1;Ham House|house|house w=2 f=3 r=flat;Osterley Park|house|house W=44 f=2 r=flat tw=sq p=1;Sutton House|house|house W=30 f=3 r=gable g=2 c=2;Morden Hall Park|countryside|mill v=wheel;Fenton House|house|house W=30 f=3 r=hip c=2 tr=1`,
-  "East of England": `Blickling Estate~Blickling|house|house W=44 f=2 r=gable g=2 tw=ogee d=cupola;Felbrigg Hall|house|house W=40 f=2 r=gable g=3 c=3;Oxburgh Estate~Oxburgh|house|castle moat=1 keep=gate;Ickworth|house|temple wings=1;Melford Hall|house|house W=40 f=2 r=gable tw=ogee;Anglesey Abbey|house|house W=36 f=2 r=gable g=3 c=2 tr=1;Wimpole Estate~Wimpole|house|house W=40 w=2 f=3 r=flat;Wicken Fen|countryside|windpump;Sutton Hoo|ruin|mound;Flatford|countryside|mill;Blakeney National Nature Reserve~Blakeney Point|coast|beach seal=1;Dunwich Heath|coast|beach;Hatfield Forest|countryside|park oak=1`,
-  "Midlands": `Kedleston Hall|house|house W=36 w=2 f=3 r=flat p=1 d=dome;Hardwick Hall|house|house W=40 f=4 r=flat tw=sq big=1;Calke Abbey|house|house W=40 f=3 r=flat p=1 tw=sq;Belton House|house|house W=40 f=2 r=hip d=cupola c=4;Woolsthorpe Manor~Woolsthorpe|house|apple;Tattershall Castle|castle|castle keep=tall;Clumber Park|countryside|lakepark spire=1;Baddesley Clinton|house|house W=36 f=2 r=gable g=2 moat=1;Packwood House|house|garden yews=1;Charlecote Park|house|park house=1;Croome|garden|temple v=lake;Attingham Park|house|house W=36 w=2 f=3 r=flat p=1;Berrington Hall|house|house W=36 f=2 r=hip p=1 tr=1;Kinver Edge|countryside|hills v=rock;Dovedale|countryside|hills v=dove;Mam Tor|countryside|hills v=ridge;Sudbury Hall|house|house W=40 f=2 r=hip d=cupola tr=1`,
-  "North": `Fountains Abbey & Studley Royal~Fountains Abbey|ruin|abbey;Rievaulx Terrace|garden|temple v=terrace t=portico;Mount Grace Priory|ruin|abbey t=low;Nunnington Hall|house|house W=34 f=2 r=gable c=3 water=1;Beningbrough Hall|house|house W=40 f=3 r=hip d=cupola;Nostell|house|house W=36 w=2 f=3 r=flat p=1;Malham Tarn|countryside|hills lake=1 wall=1;Cragside|house|house W=40 f=3 r=gable g=3 tudor=1 c=3 tr=2;Wallington|house|house W=40 f=3 r=hip c=2 tr=1;Lindisfarne Castle|castle|island v=crag;Seaton Delaval Hall~Seaton Delaval|house|house W=32 w=2 f=3 r=flat p=1 tw=sq;Souter Lighthouse|coast|lighthouse stripe=1 cot=1;Housesteads Roman Fort~Housesteads|ruin|roman;Gibside|countryside|column;Hill Top|house|cottage;Tarn Hows|countryside|hills lake=1 pines=1;Wordsworth House|house|house W=36 f=3 r=gable c=2;Sizergh|house|house W=36 f=2 r=gable tw=batt tr=1;Speke Hall|house|house W=44 f=2 r=gable g=3 tudor=1;Formby|coast|beach pines=1;Lyme|house|house W=44 f=3 r=flat p=1 water=1;Dunham Massey|house|park house=1;Quarry Bank|house|mill v=quarry;Little Moreton Hall|house|house W=36 f=3 r=gable g=3 tudor=1;Tatton Park|house|house W=40 f=2 r=flat p=1 tr=2`,
-  "Wales": `Powis Castle|castle|castle hill=1 terr=1 round=1;Erddig|house|house W=46 f=3 r=flat tr=1;Chirk Castle|castle|castle round=1;Bodnant Garden~Bodnant|garden|garden arch=1;Penrhyn Castle|castle|castle keep=1 trees=1;Plas Newydd|house|house W=40 f=3 r=flat wp=1 water=1;Tredegar House|house|house W=40 f=3 r=hip c=2;Dinefwr|countryside|park ruin=1;Llanerchaeron|house|house W=30 f=2 r=hip c=2 tr=2;Rhossili & South Gower~Rhossili|coast|cliffs v=worm;Stackpole|coast|cliffs v=arch;Dolaucothi Gold Mines~Dolaucothi|ruin|mine`,
-  "Northern Ireland": `Giant's Causeway|coast|hexagons;Carrick-a-Rede|coast|ropebridge;Mussenden Temple|coast|temple v=cliff;Mount Stewart|house|house W=40 f=2 r=flat p=1 tr=2;Castle Ward|house|house W=40 f=2 r=flat wp=1 tr=1;Florence Court|house|house W=30 w=2 f=3 r=hip;The Argory|house|house W=34 f=2 r=hip c=2;Rowallane Garden~Rowallane|garden|garden`
+  "South West": `Tyntesfield|house|house W=36 f=3 r=gable tw=spire c=3 tr=1;Dyrham Park|house|park house=1;Clevedon Court|house|house W=40 f=2 r=gable g=3 c=2;Leigh Woods|countryside|hills woods=1;Prior Park Landscape Garden~Prior Park|garden|temple v=bridge;Lacock Abbey|house|house W=38 f=2 r=flat tw=oct wp=1 tr=1;Stourhead|garden|temple v=lake;Avebury|ruin|stones;Stonehenge|ruin|stones v=henge;Old Sarum|ruin|castle hill=1 ruin=1;Longleat|house|house W=50 f=3 r=flat tw=pinn tr=1;Newark Park|house|house W=28 f=3 r=flat c=2 tr=2;Chedworth Roman Villa~Chedworth|ruin|roman v=mosaic;Snowshill Manor|house|house W=34 f=2 r=gable g=2 c=2 tr=1;Hidcote|garden|garden hedges=1;Brean Down|coast|hills v=ridge sea=1;Cheddar Gorge|countryside|hills v=gorge;Montacute House|house|house W=44 f=3 r=flat tw=pinn;Barrington Court|house|house W=40 f=2 r=gable g=3 tw=pinn;Lytes Cary Manor|house|house W=34 f=2 r=gable g=2 tr=1;Dunster Castle|castle|castle hill=1 trees=1 keep=1;Holnicote Estate|countryside|hills woods=1 wall=1;Corfe Castle|castle|castle hill=1 ruin=1 keep=1;Kingston Lacy|house|house W=40 f=3 r=hip c=4 tr=1;Studland Bay|coast|lighthouse stacks=1 nolight=1;Golden Cap|coast|cliffs v=cap;Killerton|house|house W=40 f=2 r=hip tr=2;Knightshayes|house|house W=40 f=2 r=gable g=2 c=3 wp=1;Castle Drogo|castle|castle hill=1 keep=1;Arlington Court|house|house W=36 f=2 r=flat p=1 tr=1;Lanhydrock|house|house W=40 f=2 r=gable g=3 c=4 tr=2;Cotehele|house|house W=30 f=2 r=gable tw=batt tr=1;St Michael's Mount|castle|island;Tintagel Castle|castle|island v=crag;Pendennis Castle|castle|castle hill=1 round=1;Trelissick|garden|garden;Glendurgan Garden~Glendurgan|garden|garden maze=1;Kynance Cove|coast|cliffs v=cove`,
+  "South East & London": `Sissinghurst Castle Garden~Sissinghurst|garden|garden tower=1;Knole|house|park;Chartwell|house|house W=36 f=2 r=gable g=3 c=4 tr=1;Scotney Castle|castle|castle moat=1 ruin=1 round=1;Bodiam Castle|castle|castle moat=1 round=1;Leeds Castle|castle|castle moat=1 keep=1 trees=1;Hever Castle|castle|castle moat=1 keep=gate;Dover Castle|castle|castle hill=1 keep=1;Battle Abbey|ruin|castle keep=gate trees=1;Petworth|house|house W=56 f=3 r=flat tr=0;Nymans|garden|abbey t=low;Sheffield Park|garden|lakepark;Wakehurst|garden|garden house=1;Polesden Lacey|house|house W=40 f=2 r=hip p=1 tr=1;Hinton Ampner|house|house W=36 f=2 r=hip c=2 tr=1;Highclere Castle|house|house W=44 f=3 r=flat tw=sq tr=1;Osborne|house|house W=36 f=3 r=hip tw=sq tr=1;Mottisfont|garden|garden v=roses;The Vyne|house|house W=40 f=2 r=gable p=1 c=4;Basildon Park|house|house w=2 f=2 r=flat p=1;Blenheim Palace|house|house W=40 w=2 f=3 r=flat p=1 tw=sq;Cliveden|house|house W=44 f=3 r=flat tr=1;Waddesdon Manor|house|house W=44 f=3 r=mansard tw=round;Stowe|garden|temple v=lake t=portico;Birling Gap & Seven Sisters~Seven Sisters|coast|cliffs v=sisters;White Cliffs of Dover|coast|cliffs v=dover;The Needles Old Battery~The Needles|coast|lighthouse stacks=1;Hampton Court Palace~Hampton Court|house|house W=50 f=2 r=flat tw=oct c=4 water=1;Tower of London|castle|castle keep=1 round=1;Ham House|house|house w=2 f=3 r=flat;Osterley Park|house|house W=44 f=2 r=flat tw=sq p=1;Sutton House|house|house W=30 f=3 r=gable g=2 c=2;Morden Hall Park|countryside|mill v=wheel;Fenton House|house|house W=30 f=3 r=hip c=2 tr=1`,
+  "East of England": `Blickling Estate~Blickling|house|house W=44 f=2 r=gable g=2 tw=ogee d=cupola;Felbrigg Hall|house|house W=40 f=2 r=gable g=3 c=3;Oxburgh Estate~Oxburgh|house|castle moat=1 keep=gate;Audley End|house|house W=50 f=2 r=flat tw=sq tr=1;Ickworth|house|temple wings=1;Melford Hall|house|house W=40 f=2 r=gable tw=ogee;Anglesey Abbey|house|house W=36 f=2 r=gable g=3 c=2 tr=1;Wimpole Estate~Wimpole|house|house W=40 w=2 f=3 r=flat;Wicken Fen|countryside|windpump;Sutton Hoo|ruin|mound;Flatford|countryside|mill;Blakeney National Nature Reserve~Blakeney Point|coast|beach seal=1;Dunwich Heath|coast|beach;Hatfield Forest|countryside|park oak=1`,
+  "Midlands": `Chatsworth|house|house W=50 f=3 r=flat water=1 tr=1;Burghley House|house|house W=44 f=3 r=flat tw=ogee;Kedleston Hall|house|house W=36 w=2 f=3 r=flat p=1 d=dome;Hardwick Hall|house|house W=40 f=4 r=flat tw=sq big=1;Calke Abbey|house|house W=40 f=3 r=flat p=1 tw=sq;Belton House|house|house W=40 f=2 r=hip d=cupola c=4;Woolsthorpe Manor~Woolsthorpe|house|apple;Tattershall Castle|castle|castle keep=tall;Warwick Castle|castle|castle round=1 keep=1 trees=1;Kenilworth Castle|castle|castle ruin=1 keep=1;Clumber Park|countryside|lakepark spire=1;Baddesley Clinton|house|house W=36 f=2 r=gable g=2 moat=1;Packwood House|house|garden yews=1;Charlecote Park|house|park house=1;Croome|garden|temple v=lake;Attingham Park|house|house W=36 w=2 f=3 r=flat p=1;Berrington Hall|house|house W=36 f=2 r=hip p=1 tr=1;Kinver Edge|countryside|hills v=rock;Dovedale|countryside|hills v=dove;Mam Tor|countryside|hills v=ridge;Sudbury Hall|house|house W=40 f=2 r=hip d=cupola tr=1`,
+  "North": `Fountains Abbey & Studley Royal~Fountains Abbey|ruin|abbey;Rievaulx Abbey|ruin|abbey t=low;Rievaulx Terrace|garden|temple v=terrace t=portico;Whitby Abbey|ruin|abbey t=low;Mount Grace Priory|ruin|abbey t=low;Castle Howard|house|house W=36 w=2 f=2 r=flat p=1 d=dome;Nunnington Hall|house|house W=34 f=2 r=gable c=3 water=1;Beningbrough Hall|house|house W=40 f=3 r=hip d=cupola;Nostell|house|house W=36 w=2 f=3 r=flat p=1;Malham Tarn|countryside|hills lake=1 wall=1;Cragside|house|house W=40 f=3 r=gable g=3 tudor=1 c=3 tr=2;Wallington|house|house W=40 f=3 r=hip c=2 tr=1;Alnwick Castle|castle|castle round=1 keep=1 trees=1;Dunstanburgh Castle|castle|castle hill=1 ruin=1;Lindisfarne Castle|castle|island v=crag;Seaton Delaval Hall~Seaton Delaval|house|house W=32 w=2 f=3 r=flat p=1 tw=sq;Souter Lighthouse|coast|lighthouse stripe=1 cot=1;Housesteads Roman Fort~Housesteads|ruin|roman;Gibside|countryside|column;Hill Top|house|cottage;Tarn Hows|countryside|hills lake=1 pines=1;Wordsworth House|house|house W=36 f=3 r=gable c=2;Sizergh|house|house W=36 f=2 r=gable tw=batt tr=1;Speke Hall|house|house W=44 f=2 r=gable g=3 tudor=1;Formby|coast|beach pines=1;Lyme|house|house W=44 f=3 r=flat p=1 water=1;Dunham Massey|house|park house=1;Quarry Bank|house|mill v=quarry;Little Moreton Hall|house|house W=36 f=3 r=gable g=3 tudor=1;Tatton Park|house|house W=40 f=2 r=flat p=1 tr=2`,
+  "Wales": `Caernarfon Castle|castle|castle round=1 moat=1 keep=1;Conwy Castle|castle|castle round=1 trees=1;Harlech Castle|castle|castle hill=1 round=1 keep=gate;Beaumaris Castle|castle|castle moat=1 round=1;Caerphilly Castle|castle|castle moat=1 ruin=1 round=1;Tintern Abbey|ruin|abbey t=low;St Davids Bishop's Palace~St Davids|ruin|abbey;Powis Castle|castle|castle hill=1 terr=1 round=1;Erddig|house|house W=46 f=3 r=flat tr=1;Chirk Castle|castle|castle round=1;Bodnant Garden~Bodnant|garden|garden arch=1;Penrhyn Castle|castle|castle keep=1 trees=1;Plas Newydd|house|house W=40 f=3 r=flat wp=1 water=1;Tredegar House|house|house W=40 f=3 r=hip c=2;Dinefwr|countryside|park ruin=1;Llanerchaeron|house|house W=30 f=2 r=hip c=2 tr=2;Rhossili & South Gower~Rhossili|coast|cliffs v=worm;Stackpole|coast|cliffs v=arch;Dolaucothi Gold Mines~Dolaucothi|ruin|mine`,
+  "Scotland": `Edinburgh Castle|castle|castle hill=1 keep=1;Stirling Castle|castle|castle hill=1 round=1;Eilean Donan|castle|castle moat=1 keep=1;Urquhart Castle|castle|castle moat=1 ruin=1 keep=1;Culzean Castle|house|house W=44 f=3 r=flat tw=round water=1;Glamis Castle|house|house W=30 f=4 r=flat tw=round tr=1;Melrose Abbey|ruin|abbey;Skara Brae|ruin|mound;Calanais Standing Stones~Calanais|ruin|stones`,
+  "Northern Ireland": `Giant's Causeway|coast|hexagons;Carrick-a-Rede|coast|ropebridge;Mussenden Temple|coast|temple v=cliff;Dunluce Castle|castle|castle hill=1 ruin=1;Carrickfergus Castle|castle|castle moat=1 keep=1;Mount Stewart|house|house W=40 f=2 r=flat p=1 tr=2;Castle Ward|house|house W=40 f=2 r=flat wp=1 tr=1;Florence Court|house|house W=30 w=2 f=3 r=hip;The Argory|house|house W=34 f=2 r=hip c=2;Rowallane Garden~Rowallane|garden|garden`
 };
+const SUMMITS = {
+  "Scotland": `Ben Nevis|1345|summit s=crag snow=1;Ben Macdui|1309|summit s=whale snow=1;Cairn Gorm|1245|summit s=whale snow=1;Schiehallion|1083|summit s=cone;Buachaille Etive Mòr~Buachaille|1022|summit s=pyr;Ben Lomond|974|summit s=pyr loch=1;Arthur's Seat|251|summit s=dome`,
+  "Lake District": `Scafell Pike|978|summit s=crag;Helvellyn|950|summit s=crag tarn=1;Skiddaw|931|summit s=whale;Great Gable|899|summit s=pyr;Blencathra|868|summit s=twin;Coniston Old Man|803|summit s=whale tarn=1;Haystacks|597|summit s=crag tarn=1;Catbells|451|summit s=twin loch=1`,
+  "Wales": `Yr Wyddfa (Snowdon)~Yr Wyddfa|1085|summit s=pyr tarn=1;Glyder Fawr|1001|summit s=crag;Tryfan|917|summit s=twin;Cadair Idris|893|summit s=crag tarn=1;Pen y Fan|886|summit s=flat;Pumlumon|752|summit s=whale;Sugar Loaf|596|summit s=cone`,
+  "Pennines & Peak": `Cross Fell|893|summit s=whale;The Cheviot|815|summit s=whale;Whernside|736|summit s=whale;Ingleborough|723|summit s=flat;Pen-y-ghent|694|summit s=flat;Kinder Scout|636|summit s=flat;Roseberry Topping|320|summit s=cone`,
+  "Southern England": `High Willhays|621|summit s=tor;Dunkery Beacon|519|summit s=whale;Worcestershire Beacon|425|summit s=twin;Leith Hill|295|summit s=whale`,
+  "Northern Ireland": `Slieve Donard|850|summit s=pyr loch=1;Slieve Binnian|747|summit s=tor`
+};
+const TRAILS = {
+  "England": `South West Coast Path~SW Coast Path|630|1014|trail v=coast;Pennine Way|255|410|trail v=moor;Pennine Bridleway|205|330|trail v=moor;Coast to Coast|197|317|trail v=glen;Thames Path|185|298|trail v=river;Peddars Way & Norfolk Coast Path~Peddars Way|158|254|trail v=coast;North Downs Way|125|201|trail v=downs;Cleveland Way|109|175|trail v=coast;Cotswold Way|102|164|trail v=downs;South Downs Way|100|161|trail v=downs;The Ridgeway|87|140|trail v=ridge;Hadrian's Wall Path|84|135|trail v=wall;Yorkshire Wolds Way|79|127|trail v=downs`,
+  "Wales": `Wales Coast Path|870|1400|trail v=coast;Pembrokeshire Coast Path~Pembrokeshire Coast|186|299|trail v=coast;Offa's Dyke Path|177|285|trail v=ridge;Glyndŵr's Way|135|217|trail v=glen`,
+  "Scotland": `Southern Upland Way|214|344|trail v=moor;West Highland Way|96|155|trail v=glen;Speyside Way|85|137|trail v=river;Great Glen Way|79|127|trail v=glen`
+};
+const SETS = [
+  { name: "National Three Peaks", ids: ["summit-ben-nevis", "summit-scafell-pike", "summit-yr-wyddfa-snowdon"] },
+  { name: "Yorkshire Three Peaks", ids: ["summit-pen-y-ghent", "summit-ingleborough", "summit-whernside"] }
+];
 const BUILTIN = [];
-for (const r of REGIONS) RAW[r].split(";").forEach(s => {
+const splitName = nm => { const [name, short] = nm.split("~"); return { name, short }; };
+for (const r of REGIONS) (RAW[r] || "").split(";").filter(Boolean).forEach(s => {
   const [nm, type, m] = s.split("|");
-  const [name, short] = nm.split("~");
-  BUILTIN.push({ id: slug(name), name, short, type, m, region: r });
+  BUILTIN.push({ id: slug(splitName(nm).name), ...splitName(nm), type, m, region: r });
 });
-function slug(s) { return s.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
-const DEFAULT_M = { house: "house W=36 f=2 r=hip c=2 tr=1", garden: "garden", castle: "castle", coast: "cliffs v=sisters", countryside: "hills tree=1", ruin: "abbey" };
+for (const g of KINDS.summits.groups) (SUMMITS[g] || "").split(";").filter(Boolean).forEach(s => {
+  const [nm, h, m] = s.split("|"), n = splitName(nm);
+  BUILTIN.push({ id: "summit-" + slug(n.name), ...n, type: "summit", h: +h, m, region: g });
+});
+for (const g of KINDS.trails.groups) (TRAILS[g] || "").split(";").filter(Boolean).forEach(s => {
+  const [nm, mi, km, m] = s.split("|"), n = splitName(nm);
+  BUILTIN.push({ id: "trail-" + slug(n.name), ...n, type: "trail", miles: +mi, km: +km, m, region: g });
+});
+function slug(s) { return s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+const DEFAULT_M = { house: "house W=36 f=2 r=hip c=2 tr=1", garden: "garden", castle: "castle", coast: "cliffs v=sisters", countryside: "hills tree=1", ruin: "abbey", summit: "summit s=pyr", trail: "trail v=downs" };
 
 /* ---------- drawing kit (120 x 120 stamp space) ---------- */
 const F = d => `<path d="${d}" fill="currentColor"/>`;
@@ -712,6 +773,81 @@ M.beach = o => {
   return s;
 };
 
+const label = (x, y, w, txt, fs = 6.2) => P(rc(x - w / 2, y - 6.4, w, 9), .9) + `<text x="${x}" y="${y}" text-anchor="middle" fill="currentColor" font-family="Courier Prime, Courier New, monospace" font-weight="700" font-size="${fs}" letter-spacing=".2">${txt}</text>`;
+
+M.summit = o => {
+  const sh = o.s || "pyr";
+  const PEAKS = {
+    pyr: { d: "M10 86L60 32L110 86Z", top: [60, 32], ridge: "M60 32L48 52L52 60L40 74" },
+    flat: { d: "M4 86L30 60L40 50L48 46H78L86 54L96 62L116 86Z", top: [63, 46], ridge: "M48 46L42 58L36 66M86 54L82 66" },
+    twin: { d: "M10 86L38 52L46 54L56 36L62 42L68 34L76 50L84 52L110 86Z", top: [68, 34], ridge: "M56 36L54 52L46 64M68 34L70 50L76 62" },
+    whale: { d: "M0 86Q26 58 56 48Q66 45 76 48Q100 58 120 86Z", top: [66, 45.5], ridge: "M40 58Q56 52 74 52" },
+    cone: { d: "M14 86Q40 76 52 50Q57 38 60 38Q63 38 68 50Q80 76 106 86Z", top: [60, 38], ridge: "M58 44L55 58M63 46L66 60" },
+    crag: { d: "M4 86L28 64L46 50L60 42L72 41L80 48L84 60L90 62L96 70L116 86Z", top: [66, 41.2], ridge: "M80 48L78 58L84 66M84 60L82 72M88 64L90 74" },
+    dome: { d: "M4 86Q14 76 28 74L44 62Q52 50 60 51Q68 52 72 60L80 66Q100 68 116 86Z", top: [60, 51], ridge: "M44 62L48 70M72 60L70 70" },
+    tor: { d: "M0 86Q30 66 60 62Q90 64 120 86Z", top: [60, 49], ridge: "" }
+  };
+  const pk = PEAKS[sh] || PEAKS.pyr;
+  let s = S("M-5 60Q14 50 26 56Q40 44 52 52M70 50Q86 40 100 50Q110 46 125 54", .8);
+  s += F(pk.d);
+  if (sh === "tor") s += F("M48 63V55H54V52H60V49H66V53H71V57H74V63Z") + KS("M54 55V62M60 52V62M66 55V62M48 58H74", .5);
+  let k = pk.ridge ? "" : "";
+  let after = pk.ridge ? KS(pk.ridge, .8) : "";
+  if (+o.snow) after += K(`M${pk.top[0] - 6} ${pk.top[1] + 6}L${pk.top[0]} ${pk.top[1] + 1.4}L${pk.top[0] + 7} ${pk.top[1] + 6.5}L${pk.top[0] + 3} ${pk.top[1] + 5}L${pk.top[0] - 1} ${pk.top[1] + 8}Z`);
+  if (+o.tarn) after += K(ell(40, 82, 12, 2.6)) + S("M34 82h5M43 82h6", .5);
+  if (+o.loch) after += K("M-5 84Q40 79 125 83V90H-5Z") + S("M10 86h12M40 85h16M76 86h14", .6);
+  const [tx, ty] = pk.top;
+  after += F(rc(tx - 1.4, ty - 6, 2.8, 6.2) + rc(tx - 2, ty - 6.8, 4, 1.2));
+  if (o.h) after += label(60, 79, 40, `${o.h} M`, 7.4);
+  return s + after + gulls(16, 34);
+};
+
+M.trail = o => {
+  const v = o.v || "downs";
+  let s = "", path = "";
+  if (v === "coast") {
+    s += waves(78, 62) + waves(82.5, 62) + waves(87, 62) + F("M-5 100V58Q22 54 44 60Q58 64 66 72L72 82L68 100Z") + gulls(84, 40);
+    path = "M8 100Q18 84 26 72Q34 62 54 64";
+  } else if (v === "downs") {
+    s += S("M-5 52Q30 42 60 50Q90 40 125 50", .8) + tree(22, 61, .8) + F("M-5 100V66Q20 56 44 62Q70 52 96 60Q110 56 125 60V100Z");
+    path = "M40 100Q56 86 52 76Q48 68 62 62";
+  } else if (v === "ridge") {
+    s += S("M-5 56Q40 48 125 54", .8) + tree(98, 60, .9) + F("M-5 100V70L30 60Q60 54 90 58L125 66V100Z");
+    path = "M48 100Q58 84 54 72Q52 64 70 58.5";
+    s += KS("M-5 74L30 64Q60 58 90 62L125 70", .7);
+  } else if (v === "moor") {
+    s += S("M-5 56Q20 48 46 54Q70 46 125 56", .8) + F("M-5 100V64Q30 58 60 62Q90 56 125 62V100Z");
+    path = "M44 100Q54 84 58 74Q62 66 74 61";
+  } else if (v === "wall") {
+    const crag = "M-5 68L18 62L32 66L48 56L62 58L76 50L92 54L108 48L125 52";
+    s += F(crag + "V100H-5Z") + F("M-5 63L18 57L32 61L48 51L62 53L76 45L92 49L108 43L125 47V52L108 48L92 54L76 50L62 58L48 56L32 66L18 62L-5 68Z") + KS(crag, .9);
+    path = "M30 100Q40 86 36 76Q34 70 46 64";
+  } else if (v === "river") {
+    s += tree(18, 62, .9) + tree(32, 61, .7) + tree(104, 62, 1) + F(rc(-5, 62, 130, 40));
+    s += K("M-5 92Q30 86 50 78Q70 70 125 68V73Q74 74 56 82Q34 92 -5 98Z");
+    path = "M34 100Q46 92 60 86Q76 80 96 76";
+  } else {
+    s += F("M-5 72L16 48L30 60L50 34L70 56L88 42L125 66V76H-5Z") + K("M50 34L46 42L52 40L56 44Z M88 42L85 47L90 46Z") + F("M-5 100V80Q60 76 125 80V100Z") + K("M18 76Q60 72 104 76Q60 80 18 76Z");
+    path = "M40 100Q52 92 48 86Q44 82 58 80";
+  }
+  s += KS(path, 2.8);
+  const mi = o.mi ? `${o.mi} MI` : "";
+  s += F(rc(76, 50, 2.2, 34)) + P("M78.2 53h20l3.6 3.6l-3.6 3.6h-20Z", .9) + P("M76 62.4h-13l-3.6 3.6l3.6 3.6h13Z", .9);
+  if (mi) s += `<text x="88.6" y="58.6" text-anchor="middle" fill="currentColor" font-family="Courier Prime, Courier New, monospace" font-weight="700" font-size="${mi.length > 5 ? 4.6 : 5.2}">${mi}</text>`;
+  s += S("M64 66h8M65.5 64.2l-1.8 1.8l1.8 1.8", .6);
+  return s;
+};
+
+const stonesBase = M.stones;
+M.stones = o => {
+  if (o.v !== "henge") return stonesBase(o);
+  let s = ground(80) + S("M-5 66Q60 60 125 66", .8);
+  const tri = (x, w, h) => F(rc(x, 80 - h, w * .36, h) + rc(x + w * .64, 80 - h, w * .36, h) + rc(x - 1, 80 - h - 4, w + 2, 4.2));
+  s += tri(20, 18, 22) + tri(46, 22, 28) + tri(78, 18, 22);
+  s += F(rc(70, 66, 5, 14) + rc(100, 70, 5, 10) + "M8 80L10 72L16 71L18 80Z");
+  return s + KS("M28 80V62M56 80V56M88 80V62", .5) + gulls(50, 30);
+};
+
 const DEFAULT_ICON = "hills";
 
 /* ---------- frames ---------- */
@@ -746,7 +882,7 @@ const FR = {
   shield: { clip: "M12.5 31H107.5V58Q107.5 80 94 89H26Q12.5 80 12.5 58Z", scale: .92, rings: S("M8 8H112V58Q112 96 60 114Q8 96 8 58Z", 2.6) + S("M12.5 12.5H107.5V58Q107.5 92 60 109Q12.5 92 12.5 58Z", .9) + S("M12.5 31H107.5M26 89H94", 1.2), text: (n, d) => ({ defs: "", el: lineText(n, 26, 88, 8.8, 6.4) + lineText(d, 99.5, 50, 7.6, 6.4) }) },
   octagon: { clip: "M21.7 31H98.3L107.6 40.3V79.7L97.3 90H22.7L12.4 79.7V40.3Z", scale: .9, rings: S(octPath(56), 2.6) + S(octPath(51.5), .9) + S("M21.7 31H98.3M22.7 90H97.3", 1.2), text: (n, d) => ({ defs: "", el: lineText(n, 26.5, 56, 8.6, 6.4) + lineText(d, 101, 52, 7.8, 6.4) }) }
 };
-const FRAME_BY_TYPE = { house: ["rect", "oval"], castle: ["shield", "octagon"], garden: ["scallop", "oval"], coast: ["round", "scallop"], countryside: ["oval", "round"], ruin: ["octagon", "round"] };
+const FRAME_BY_TYPE = { summit: ["octagon", "round"], trail: ["rect", "shield"], house: ["rect", "oval"], castle: ["shield", "octagon"], garden: ["scallop", "oval"], coast: ["round", "scallop"], countryside: ["oval", "round"], ruin: ["octagon", "round"] };
 function pickFrame(p, label) {
   const opts = FRAME_BY_TYPE[p.type] || ["round"];
   let f = opts[hash(p.id + "frame") % opts.length];
@@ -767,6 +903,7 @@ function motif(p) {
   if (motifCache[p.id] !== undefined) return motifCache[p.id];
   const [kind, ...rest] = (p.m || DEFAULT_M[p.type] || DEFAULT_ICON).split(" ");
   const o = {}; rest.forEach(t => { const [k, v] = t.split("="); o[k] = v === undefined ? "1" : v; });
+  if (p.h) o.h = p.h; if (p.miles) o.mi = p.miles;
   let out = ""; try { out = (M[kind] || M.hills)(o); } catch (e) { out = ""; }
   return (motifCache[p.id] = out);
 }
@@ -786,46 +923,64 @@ function stampSVG(place, date, cls = "", ghost = false) {
 let state = { stamps: {}, custom: [] };
 const LS = "heritage-passport-v1";
 try { const s = JSON.parse(localStorage.getItem(LS) || "null"); if (s && s.stamps) state = { stamps: s.stamps || {}, custom: s.custom || [] }; } catch (e) {}
-let filter = { q: "", region: "All", show: "all" };
+let filter = { q: "", region: "All", show: "all", kind: KINDS[location.hash.slice(1)] ? location.hash.slice(1) : "places" };
 let freshId = null;
 function allPlaces() { return BUILTIN.concat(state.custom || []); }
 
 /* ---------- render ---------- */
 const $ = s => document.querySelector(s);
+function kindItems(kind) { return allPlaces().filter(p => kindOf(p) === kind); }
 function render() {
-  const places = allPlaces();
   const stamps = state.stamps || {};
-  const count = places.filter(p => stamps[p.id]).length;
-  $("#t-count").textContent = count;
-  $("#t-total").textContent = places.length;
-  $("#t-regions").textContent = REGIONS.filter(r => places.some(p => p.region === r && stamps[p.id])).length;
+  const ids = new Set(allPlaces().map(p => p.id));
+  $("#t-count").textContent = Object.keys(stamps).filter(id => ids.has(id)).length;
+  for (const k of Object.keys(KINDS)) {
+    const items = kindItems(k);
+    $(`#t-${k}`).textContent = items.filter(p => stamps[p.id]).length;
+    $(`#t-${k}-of`).textContent = "of " + items.length;
+  }
+  document.querySelectorAll("[data-kind]").forEach(b => b.setAttribute("aria-selected", b.dataset.kind === filter.kind));
+  const K_ = KINDS[filter.kind], groups = K_.groups;
+  if (filter.region !== "All" && !groups.includes(filter.region)) filter.region = "All";
+  $("#q").placeholder = { places: "Search places, e.g. Tyntesfield", summits: "Search summits, e.g. Helvellyn", trails: "Search trails, e.g. Cotswold Way" }[filter.kind];
+  $("#chips").innerHTML = ["All", ...groups].map(r => `<button type="button" class="chip" data-region="${esc(r)}" aria-pressed="${filter.region === r}">${esc(r)}</button>`).join("");
 
-  const chips = $("#chips");
-  chips.innerHTML = ["All", ...REGIONS].map(r => `<button type="button" class="chip" data-region="${esc(r)}" aria-pressed="${filter.region === r}">${esc(r)}</button>`).join("");
+  const items = kindItems(filter.kind);
+  let summary = "";
+  if (filter.kind === "summits") {
+    const metres = items.filter(p => stamps[p.id] && p.h).reduce((a, p) => a + p.h, 0);
+    summary = `<div class="summary"><div class="stat"><b>${metres.toLocaleString("en-GB")}</b><span>metres of summit stamped</span></div>${SETS.map(st => { const got = st.ids.filter(id => stamps[id]).length; const full = got === st.ids.length; return `<div class="set${full ? " full" : ""}"><span class="set-name">${esc(st.name)}</span><span class="dots" aria-label="${got} of ${st.ids.length}">${st.ids.map(id => `<i class="${stamps[id] ? "on" : ""}"></i>`).join("")}</span><span class="set-state">${full ? "Complete" : `${got} / ${st.ids.length}`}</span></div>`; }).join("")}</div>`;
+  }
+  if (filter.kind === "trails") {
+    const miles = items.filter(p => stamps[p.id] && p.miles).reduce((a, p) => a + p.miles, 0);
+    summary = `<div class="summary"><div class="stat"><b>${miles.toLocaleString("en-GB")}</b><span>miles of trail completed</span></div></div>`;
+  }
 
   const q = filter.q.trim().toLowerCase();
   let pageNo = 0, html = "";
-  for (const r of REGIONS) {
+  for (const r of groups) {
     pageNo++;
     if (filter.region !== "All" && filter.region !== r) continue;
-    const inRegion = places.filter(p => p.region === r);
+    const inRegion = items.filter(p => p.region === r);
     const done = inRegion.filter(p => stamps[p.id]).length;
     let list = inRegion.filter(p => !q || p.name.toLowerCase().includes(q));
     if (filter.show === "done") list = list.filter(p => stamps[p.id]);
     if (filter.show === "todo") list = list.filter(p => !stamps[p.id]);
     if (!list.length) continue;
-    list.sort((a, b) => (stamps[b.id] ? 1 : 0) - (stamps[a.id] ? 1 : 0) || a.name.localeCompare(b.name));
-    html += `<section class="page" aria-labelledby="h-${slug(r)}">
-      <div class="page-head"><h2 id="h-${slug(r)}">${esc(r)}</h2>
+    list.sort((a, b) => (stamps[b.id] ? 1 : 0) - (stamps[a.id] ? 1 : 0) || (b.h || 0) - (a.h || 0) || (b.miles || 0) - (a.miles || 0) || a.name.localeCompare(b.name));
+    const hid = "h-" + filter.kind + "-" + slug(r);
+    html += `<section class="page" aria-labelledby="${hid}">
+      <div class="page-head"><h2 id="${hid}">${esc(r)}</h2>
         <div class="page-meta"><span>${done} / ${inRegion.length}</span><span class="bar" aria-hidden="true"><i style="width:${inRegion.length ? done / inRegion.length * 100 : 0}%"></i></span><span>Page ${String(pageNo).padStart(2, "0")}</span></div></div>
       <div class="grid">${list.map(p => slotHTML(p, stamps[p.id])).join("")}</div></section>`;
   }
-  $("#pages").innerHTML = html || `<p class="empty">No places match. Try another search, or add the place yourself.</p>`;
+  $("#pages").innerHTML = summary + (html || `<p class="empty">No ${K_.noun} match. Try another search, or add it yourself.</p>`);
   freshId = null;
 }
+function detail(p) { return p.h ? `${p.h.toLocaleString("en-GB")} m` : p.miles ? `${p.miles} miles · ${p.km} km` : TYPES[p.type]; }
 function slotHTML(p, s) {
   if (s) return `<button type="button" class="slot done" data-id="${esc(p.id)}"><span class="face">${stampSVG(p, s.date, p.id === freshId ? "fresh" : "")}</span><span class="name">${esc(p.name)}</span></button>`;
-  return `<button type="button" class="slot" data-id="${esc(p.id)}"><span class="face">${stampSVG(p, "", "", true)}</span><span class="name">${esc(p.name)}</span><span class="sub">${TYPES[p.type]}</span></button>`;
+  return `<button type="button" class="slot" data-id="${esc(p.id)}"><span class="face">${stampSVG(p, "", "", true)}</span><span class="name">${esc(p.name)}</span><span class="sub">${detail(p)}</span></button>`;
 }
 
 /* ---------- persistence (this device) ---------- */
@@ -839,11 +994,11 @@ try { if (navigator.storage && navigator.storage.persist) navigator.storage.pers
 let toastTimer;
 function toast(msg) { const t = $("#toast"); t.textContent = msg; t.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => t.hidden = true, 3200); }
 async function saveBackup() {
-  const name = `stamp-passport-backup-${today()}.json`;
-  const json = JSON.stringify({ app: "stamp-passport", version: 1, exported: new Date().toISOString(), stamps: state.stamps, custom: state.custom }, null, 2);
+  const name = `waystamp-backup-${today()}.json`;
+  const json = JSON.stringify({ app: "waystamp", version: 1, exported: new Date().toISOString(), stamps: state.stamps, custom: state.custom }, null, 2);
   const file = new File([json], name, { type: "application/json" });
   try {
-    if (matchMedia("(pointer: coarse)").matches && navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: "Stamp Passport backup" }); return; }
+    if (matchMedia("(pointer: coarse)").matches && navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: "Waystamp backup" }); return; }
   } catch (e) { if (e && e.name === "AbortError") return; }
   const url = URL.createObjectURL(file);
   const a = document.createElement("a"); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
@@ -857,17 +1012,17 @@ async function restoreBackup(file) {
     let added = 0;
     for (const [id, v] of Object.entries(d.stamps)) if (v && typeof v.date === "string" && !state.stamps[id]) { state.stamps[id] = { date: v.date.slice(0, 10), note: String(v.note || "").slice(0, 500) }; added++; }
     const known = new Set(allPlaces().map(p => p.id));
-    for (const p of (Array.isArray(d.custom) ? d.custom : [])) if (p && p.id && p.name && !known.has(p.id) && REGIONS.includes(p.region) && TYPES[p.type]) { state.custom.push({ id: String(p.id), name: String(p.name).slice(0, 60), region: p.region, type: p.type }); known.add(p.id); }
+    for (const p of (Array.isArray(d.custom) ? d.custom : [])) if (p && p.id && p.name && !known.has(p.id) && TYPES[p.type] && KINDS[kindOf(p)].groups.includes(p.region)) { state.custom.push({ id: String(p.id), name: String(p.name).slice(0, 60), region: p.region, type: p.type }); known.add(p.id); }
     persist(); render();
     toast(added ? `Restored ${added} stamp${added === 1 ? "" : "s"}` : "Nothing new in that backup. Your stamps are unchanged.");
-  } catch (e) { toast("That file isn't a Stamp Passport backup."); }
+  } catch (e) { toast("That file isn't a Waystamp backup."); }
 }
 
 /* ---------- install ---------- */
 let installEvt = null;
 const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
 addEventListener("beforeinstallprompt", e => { e.preventDefault(); installEvt = e; if (!standalone) $("#install").hidden = false; });
-addEventListener("appinstalled", () => { $("#install").hidden = true; toast("Installed. Look for Passport on your home screen."); });
+addEventListener("appinstalled", () => { $("#install").hidden = true; toast("Installed. Look for Waystamp on your home screen."); });
 if (!standalone && /iphone|ipad|ipod/i.test(navigator.userAgent)) $("#ios-hint").hidden = false;
 
 /* ---------- interactions ---------- */
@@ -878,7 +1033,8 @@ function openStamp(id) {
   const p = allPlaces().find(x => x.id === id); if (!p) return;
   current = p;
   const s = state.stamps[id];
-  $("#s-kicker").textContent = p.region + " · " + TYPES[p.type];
+  $("#s-kicker").textContent = p.region + " · " + (p.h || p.miles ? TYPES[p.type] + " · " + detail(p) : TYPES[p.type]);
+  $("#s-date-label").textContent = p.type === "trail" ? "Date finished" : p.type === "summit" ? "Date summited" : "Date of visit";
   $("#s-title").textContent = p.name;
   $("#s-confirm").hidden = true;
   $("#s-actions").hidden = false;
@@ -920,11 +1076,13 @@ $("#f-stamp").addEventListener("submit", e => {
 });
 
 const dlgA = $("#dlg-add");
-$("#a-region").innerHTML = REGIONS.map(r => `<option>${esc(r)}</option>`).join("");
 $("#a-type").innerHTML = Object.entries(TYPES).map(([k, v]) => `<option value="${k}">${v}</option>`).join("");
+function fillRegions() { const g = KINDS[kindOf({ type: $("#a-type").value })].groups; $("#a-region").innerHTML = g.map(r => `<option>${esc(r)}</option>`).join(""); if (g.includes(filter.region)) $("#a-region").value = filter.region; }
+$("#a-type").addEventListener("change", fillRegions);
 $("#add-btn").onclick = () => {
   $("#a-name").value = $("#q").value.trim();
-  if (filter.region !== "All") $("#a-region").value = filter.region;
+  $("#a-type").value = filter.kind === "summits" ? "summit" : filter.kind === "trails" ? "trail" : "house";
+  fillRegions();
   dlgA.showModal();
 };
 $("#a-cancel").onclick = () => dlgA.close();
@@ -934,9 +1092,14 @@ $("#f-add").addEventListener("submit", e => {
   const p = { id: "c-" + slug(name) + "-" + Date.now().toString(36), name, region: $("#a-region").value, type: $("#a-type").value };
   state.custom.push(p);
   persist();
-  filter.q = ""; $("#q").value = "";
+  filter.q = ""; $("#q").value = ""; filter.kind = kindOf(p);
   render(); dlgA.close();
   setTimeout(() => openStamp(p.id), 60);
+});
+document.querySelectorAll("[data-kind]").forEach(b => b.onclick = () => {
+  filter.kind = b.dataset.kind; filter.region = "All";
+  try { history.replaceState(null, "", "#" + filter.kind); } catch (e) {}
+  render(); window.scrollTo({ top: 0 });
 });
 
 $("#q").addEventListener("input", e => { filter.q = e.target.value; render(); });

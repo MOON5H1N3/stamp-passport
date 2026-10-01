@@ -1,6 +1,6 @@
-// Stamp Passport offline support.
+// Waystamp offline support.
 // Bump VERSION whenever you upload a new index.html so phones pick up the change.
-const VERSION = "passport-v1";
+const VERSION = "waystamp-v2";
 const CORE = [
   "./",
   "./index.html",
@@ -9,7 +9,7 @@ const CORE = [
   "./icons/icon-512.png",
   "./icons/apple-touch-icon.png"
 ];
-const FONT_CACHE = "passport-fonts";
+const FONT_CACHE = "waystamp-fonts";
 
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(VERSION).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
